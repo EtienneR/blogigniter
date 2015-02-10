@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /assets/
+Disallow: /captcha/
+Sitemap: /sitemap.xml
