@@ -71,11 +71,13 @@ class Blog extends CI_Controller {
 			$data['query']		= $this->model_content->get_contents_listing('', $page_number, $config['per_page']);
 			$data['pagination']	= $this->pagination->create_links();
 
-			// Nb comments
-			foreach ($data['query']->result() as $row):
-				$nb_comments[$row->c_id] = $this->front->get_comments($row->c_id)->num_rows();
-			endforeach;
-			$data['nb_comments'] = $nb_comments;
+			if ($total_rows > 0):
+				// Nb comments
+				foreach ($data['query']->result() as $row):
+					$nb_comments[$row->c_id] = $this->front->get_comments($row->c_id)->num_rows();
+				endforeach;
+				$data['nb_comments'] = $nb_comments;
+			endif;
 
 			//$data['meta_pagination'] = $this->front->get_pagination_seo($pagination['base_url'], $pagination['first_url'], $page_number, $pagination['total_rows'], $config['per_page'], $type='POST');
 		endif;

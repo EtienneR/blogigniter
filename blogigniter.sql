@@ -1,5 +1,7 @@
 --
 -- Base de données :  `blogigniter`
+CREATE DATABASE IF NOT EXISTS `blogigniter` DEFAULT CHARACTER SET utf8 COLLATE=utf8_unicode_ci;
+USE `blogigniter`;
 --
 
 -- --------------------------------------------------------
@@ -18,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`com_id`),
   KEY `com_id` (`com_id`),
   KEY `c_id` (`c_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -44,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `content` (
   UNIQUE KEY `c_title` (`c_title`),
   KEY `fk_r_id` (`r_id`),
   KEY `fk_u_id` (`u_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -64,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `params` (
   `p_google` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`p_id`),
   KEY `p_id` (`p_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -80,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `rubric` (
   PRIMARY KEY (`r_id`),
   UNIQUE KEY `r_url_rw` (`r_url_rw`),
   UNIQUE KEY `r_title` (`r_title`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -94,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `search` (
   `s_date` datetime NOT NULL,
   `s_score` int(11) NOT NULL,
   PRIMARY KEY (`s_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=161 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -115,7 +117,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`u_id`),
   UNIQUE KEY `u_login` (`u_login`),
   UNIQUE KEY `u_email` (`u_email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `user` (`u_id`, `u_login`, `u_pass`, `u_email`, `u_level`, `u_status`, `u_biography`, `u_twitter`, `u_google`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@admin.com', 1, 1, 'Je suis l''admin de ce site', '', '');
 
 --
 -- Contraintes pour les tables exportées
@@ -133,7 +138,3 @@ ALTER TABLE `comment`
 ALTER TABLE `content`
   ADD CONSTRAINT `fk_r_id` FOREIGN KEY (`r_id`) REFERENCES `rubric` (`r_id`),
   ADD CONSTRAINT `fk_u_id` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -89,21 +89,27 @@ class Model_rubric extends CI_Model {
 								->where('c_status', 1)
 								->get();
 
-		foreach ($get_rubrics->result() as $row):
-			$r_id[]  = ' OR r_id = '. $row->r_id;
-			$r_id[0] = current($r_id);
-		endforeach;
+		if ($get_rubrics->num_rows() > 0):
 
-		$first	  = current($r_id);
-		$explode  = explode(" OR", $first);
-		$first_id = $explode[1];
-		$params	  = implode('', $r_id );
+			foreach ($get_rubrics->result() as $row):
+				$r_id[]  = ' OR r_id = '. $row->r_id;
+				$r_id[0] = current($r_id);
+			endforeach;
 
-		$query = $this->db->query('SELECT r_id, r_title, r_description, r_url_rw
-FROM rubric
-WHERE ' . $first_id . ' ' . $params . ' 
-ORDER BY r_title ASC');
-		return $query;
+			$first	  = current($r_id);
+			$explode  = explode(" OR", $first);
+			$first_id = $explode[1];
+			$params	  = implode('', $r_id );
+
+			$query = $this->db->query('SELECT r_id, r_title, r_description, r_url_rw
+										FROM rubric
+										WHERE ' . $first_id . ' ' . $params . ' 
+										ORDER BY r_title ASC');
+			return $query;
+
+		else:
+			return false;
+		endif;
 
 	}
 
