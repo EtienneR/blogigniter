@@ -32,10 +32,11 @@ class Content extends CI_Controller {
 			$data['page']	 = 'home';
 			$data['title']	 = 'Tous les articles';
 
-			$data['rubrics'] = $this->functions->get_all_rubrics();
-			$data['tags']	 = $this->_all_tags();
-			$data['users']	 = $this->model_user->get_users();
-			$data['query']	 = $this->functions->get_all_content();
+			$data['rubrics'] 	 = $this->functions->get_all_rubrics();
+			$data['nb_comments'] = $this->functions->get_comments();
+			$data['tags']	 	 = $this->_all_tags();
+			$data['users']	 	 = $this->model_user->get_users();
+			$data['query']	 	 = $this->functions->get_all_content();
 
 			$this->load->view(URL_LAYOUT, $data);
 
