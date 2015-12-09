@@ -63,6 +63,14 @@ class Params extends CI_Controller {
 
 				if ($this->form_validation->run() !== FALSE):
 
+					if ($p_nb_listing == 0) {
+						$p_nb_listing = 5;
+					}
+
+					if ($p_nb_listing_f == 0) {
+						$p_nb_listing_f = 10;
+					}
+
 					if (empty($params)):
 						$this->model_params->insert_params($p_title, $p_m_description, $p_about, $p_email, $p_nb_listing, $p_nb_listing_f, $p_twitter, $p_google);
 					else:
