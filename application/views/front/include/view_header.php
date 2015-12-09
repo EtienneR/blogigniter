@@ -78,6 +78,7 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
+					<?php if ($query_all_rubrics): ?>
 					<ul class="nav navbar-nav navbar-left" role="navigation">
 					<?php foreach ($query_all_rubrics->result() as $row): ?>
 						<li <?php if($this->uri->segment(1) == $row->r_url_rw){ echo 'class="active"'; }?>>
@@ -87,6 +88,7 @@
 						</li>
 					<?php endforeach; ?>
 					</ul>
+					<?php endif; ?>
 					<form action="<?php echo base_url('s'); ?>" method="get" class="navbar-form navbar-right" role="search">
 						<div class="form-group">
 							<input name="q" type="search" class="form-control" placeholder="Rechercher" required>
